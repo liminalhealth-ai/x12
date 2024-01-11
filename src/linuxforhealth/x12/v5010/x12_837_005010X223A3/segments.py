@@ -1249,7 +1249,7 @@ class Loop2400DtpSegment(DtpSegment):
     """
 
     date_time_qualifier: Literal["472"]
-    date_time_period_format_qualifier: Literal["D8"]
+    date_time_period_format_qualifier: Literal["D8", "RD8"]
 
 
 class Loop2400PwkSegment(PwkSegment):

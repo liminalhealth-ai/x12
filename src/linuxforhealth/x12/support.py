@@ -114,6 +114,9 @@ def parse_x12_date(date_string: str) -> Union[datetime.date, datetime.datetime, 
     elif len(date_string) == 12:
         # date and time
         parsed_date = datetime.datetime.strptime(date_string, "%Y%m%d%H%M")
+    elif len(date_string) in [4, 6]:
+        # time
+        return date_string
 
     return parsed_date
 

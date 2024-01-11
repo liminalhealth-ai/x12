@@ -202,6 +202,8 @@ class X12ModelReader:
 
         for segment_name, segment_fields in self._x12_segment_reader.segments():
 
+            # print(version, transaction_code, segment_name, segment_fields)
+
             if self._is_group_header(segment_name):
                 version: str = segment_fields[
                     TransactionSetVersionIds.IMPLEMENTATION_VERSION
