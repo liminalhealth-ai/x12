@@ -625,6 +625,7 @@ class Loop2300NteSegment(NteSegment):
         Code values for NTE01
         """
 
+        BILLING_NOTE = "ADD"
         ALLERGIES = "ALG"
         GOALS_REHAB_POTENTIAL_DISCHARGE_PLANS = "DCP"
         DIAGNOSIS_DESCRIPTION = "DGN"
