@@ -468,7 +468,7 @@ class Loop2410(X12SegmentGroup):
 
     lin_segment: LinSegment
     ctp_segment: CtpSegment
-    ref_segment: Loop2410RefSegment
+    ref_segment: Optional[Loop2410RefSegment]
 
 
 class Loop2400(X12SegmentGroup):
