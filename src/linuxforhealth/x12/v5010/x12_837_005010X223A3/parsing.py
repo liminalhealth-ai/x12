@@ -338,6 +338,7 @@ def set_claim_loop(context: X12ParserContext, segment_data: Dict) -> None:
             "pwk_segment": [],
             "ref_segment": [],
             "k3_segment": [],
+            "nte_segment": [],
             "hi_segment": [],
         }
     )
