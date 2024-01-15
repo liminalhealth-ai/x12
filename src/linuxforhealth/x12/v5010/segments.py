@@ -3073,7 +3073,7 @@ class SvdSegment(X12Segment):
     segment_name: X12SegmentName = X12SegmentName.SVD
     other_payer_primary_identifier: str = Field(min_length=2, max_length=80)
     service_line_paid_amount: Decimal
-    composite_medical_procedure_identifier: str = Field(is_component=True)
+    composite_medical_procedure_identifier: Optional[str] = Field(is_component=True)
     product_service_id: Optional[str] = Field(max_length=48)
     paid_service_count: Decimal
     bundled_unbundled_line_number: Optional[conint(gt=0)]
