@@ -575,7 +575,7 @@ class Loop2300(X12SegmentGroup):
     loop_2310e: Optional[Loop2310E]
     loop_2310f: Optional[Loop2310F]
     loop_2320: Optional[List[Loop2320]] = Field(min_items=0, max_items=10)
-    loop_2400: List[Loop2400] = Field(min_items=1, max_items=50)
+    loop_2400: List[Loop2400] = Field(min_items=1, max_items=1000)
 
     _validate_dtp_qualifiers = root_validator(allow_reuse=True)(
         validate_duplicate_date_qualifiers
@@ -621,7 +621,7 @@ class Loop2000C(X12SegmentGroup):
     hl_segment: Loop2000CHlSegment
     pat_segment: Loop2000CPatSegment
     loop_2010ca: Loop2010Ca
-    loop_2300: Optional[List[Loop2300]] = Field(min_items=0, max_items=100)
+    loop_2300: Optional[List[Loop2300]] = Field(min_items=0, max_items=1000)
 
 
 class Loop2000B(X12SegmentGroup):
@@ -634,7 +634,7 @@ class Loop2000B(X12SegmentGroup):
     pat_segment: Optional[PatSegment]
     loop_2010ba: Loop2010Ba
     loop_2010bb: Loop2010Bb
-    loop_2300: Optional[List[Loop2300]] = Field(min_items=0, max_items=100)
+    loop_2300: Optional[List[Loop2300]] = Field(min_items=0, max_items=1000)
     loop_2000c: Optional[List[Loop2000C]]
 
 
