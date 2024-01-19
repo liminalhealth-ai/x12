@@ -2547,6 +2547,7 @@ class NteSegment(X12Segment):
     segment_name: X12SegmentName = X12SegmentName.NTE
     note_reference_code: str = Field(min_length=3, max_length=3)
     description: str = Field(min_length=1, max_length=80)
+    description_continuation: Optional[str] = Field(min_length=0, max_length=80)
 
 
 class OiSegment(X12Segment):
