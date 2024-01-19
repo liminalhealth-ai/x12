@@ -2972,7 +2972,7 @@ class Sv1Segment(X12Segment):
     product_service_id_qualifier: str = Field(is_component=True)
     line_item_charge_amount: Decimal
     unit_basis_measurement_code: UnitBasisMeasurementCode
-    service_unit_count: condecimal(gt=Decimal("0.0"))
+    service_unit_count: Optional[condecimal(gt=Decimal("0.0"))]
     place_of_service_code: Optional[str] = Field(max_length=2)
     service_type_code: Optional[str] = Field(max_length=2)
     composite_diagnosis_code_pointer: str = Field(is_component=True)
@@ -3012,7 +3012,7 @@ class Sv2Segment(X12Segment):
     composite_medical_procedure_identifier: Optional[str] = Field(is_component=True)
     line_item_charge_amount: Decimal
     measurement_code: MeasurementCodes
-    service_unit_count: Decimal
+    service_unit_count: Optional[Decimal]
     unit_rate: Optional[Decimal]
     non_covered_charge_amount: Optional[Decimal]
     condition_response_code: Optional[str] = Field(max_length=1)
