@@ -2577,7 +2577,7 @@ class OiSegment(X12Segment):
     segment_name: X12SegmentName = X12SegmentName.OI
     claim_filing_indicator_code: Optional[str] = Field(max_length=2)
     claim_submission_reason_code: Optional[str] = Field(max_length=2)
-    benefits_assignment_certification: BenefitsAssignmentCertificationIndicator
+    benefits_assignment_certification: Optional[str]
     patient_signature_source_code: Optional[Literal["P"]]
     provider_agreement_code: Optional[str] = Field(max_length=1)
     release_of_information_code: ReleaseOfInformationCode

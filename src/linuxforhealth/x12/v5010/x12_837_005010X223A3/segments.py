@@ -1,4 +1,4 @@
-"""
+"""ept
 segments.py
 
 Specialized segment models for the HealthCare Claim Institutional 837 005010X223A3 transaction.
@@ -814,7 +814,7 @@ class Loop2310DNm1Segment(Nm1Segment):
     identification_code_qualifier: Optional[Literal["XX"]]
 
 
-class Loop2310DRefSegment(Nm1Segment):
+class Loop2310DRefSegment(RefSegment):
     """
     Claim Rendering Provider Reference Identification
     """
