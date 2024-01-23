@@ -385,7 +385,12 @@ def set_claim_entity_loop(context: X12ParserContext, segment_data: Dict) -> None
 
         claim = _get_claim(context)
         if loop_name not in claim:
-            claim[loop_name] = {"ref_segment": []}
+            if loop_name != TransactionLoops.CLAIM_REFERRING_PROVIDER_NAME:
+                claim[loop_name] = {"ref_segment": []}
+            else:
+                claim[loop_name] = {"nm1_segment": [], 
+                                    "ref_segment": []}
+
 
         loop_record = claim[loop_name]
         context.set_loop_context(loop_name, loop_record)
