@@ -75,7 +75,7 @@ def _is_patient_a_dependent(patient_record: Dict):
 
 def _get_claim(context: X12ParserContext) -> Dict:
     """Returns the current claim record for the patient (either subscriber or dependent)"""
-    claim = []
+    claim = [{}]
     if _is_patient_a_dependent(context.patient_record):
         if TransactionLoops.CLAIM_INFORMATION in context.patient_record:
             claim = context.patient_record[TransactionLoops.CLAIM_INFORMATION][-1]
