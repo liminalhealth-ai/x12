@@ -955,7 +955,7 @@ class Loop2320SbrSegment(SbrSegment):
 
     payer_responsibility_code: PayerResponsibilityCode
     individual_relationship_code: IndividualRelationshipCode
-    claim_filing_indicator_code: ClaimFilingIndicatorCode
+    claim_filing_indicator_code: Optional[ClaimFilingIndicatorCode]
 
 
 class Loop2320AmtSegment(AmtSegment):

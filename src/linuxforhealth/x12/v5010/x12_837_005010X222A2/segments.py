@@ -210,7 +210,7 @@ class Loop2000BSbrSegment(SbrSegment):
     payer_responsibility_code: PayerResponsibilityCode
     individual_relationship_code: Optional[Literal["18"]]
     insurance_type_code: Optional[InsuranceTypeCode]
-    claim_filing_indicator_code: ClaimFilingIndicatorCode
+    claim_filing_indicator_code: Optional[ClaimFilingIndicatorCode]
 
 
 class Loop2000CHlSegment(HlSegment):
