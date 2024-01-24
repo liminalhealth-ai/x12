@@ -1077,7 +1077,7 @@ class Loop2320SbrSegment(SbrSegment):
     payer_responsibility_code: PayerResponsibilityCode
     individual_relationship_code: Optional[IndividualRelationshipCode]
     insurance_type_code: Optional[InsuranceTypeCode]
-    claim_filing_indicator_code: ClaimFilingIndicatorCode
+    claim_filing_indicator_code: Optional[ClaimFilingIndicatorCode]
 
 
 class Loop2330aNm1Segment(Nm1Segment):

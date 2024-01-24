@@ -2896,7 +2896,7 @@ class SbrSegment(X12Segment):
     coordination_of_benefits_code: Optional[str] = Field(max_length=1)
     condition_response_code: Optional[str] = Field(max_length=1)
     employment_status_code: Optional[str] = Field(max_length=2)
-    claim_filing_indicator_code: str = Field(min_length=1, max_length=2)
+    claim_filing_indicator_code: Optional[str] = Field(min_length=1, max_length=2)
 
 
 class SeSegment(X12Segment):
