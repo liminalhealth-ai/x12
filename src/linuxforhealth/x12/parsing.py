@@ -250,7 +250,7 @@ class X12Parser(ABC):
         field_names: List = self._get_segment_field_names(segment_name)
         multivalue_fields: Dict = self._get_multivalue_fields(segment_name)
 
-        extra_field = False
+        extra_sbr_field = False
 
         # segment_fields and field_name lengths may not match
         # drive the mapping with segment_fields as it includes all fields within the transactional context
@@ -259,10 +259,12 @@ class X12Parser(ABC):
             try:
                 field_name: str = field_names[index]
             except IndexError as ie:
-                extra_field = True
-                break
-                # msg = f"Error parsing {segment_name} segment field {index}"
-                # raise X12ParseException(msg)
+                if segment_fields[0] == 'SBR':
+                    extra_sbr_field = True
+                    break
+                else:
+                    msg = f"Error parsing {segment_name} segment field {index}"
+                    raise X12ParseException(msg)
 
             multivalue_separator: str = multivalue_fields.get(field_name)
             if multivalue_separator:
@@ -270,10 +272,12 @@ class X12Parser(ABC):
 
             segment_data[field_name] = value if value else None
 
-        if extra_field:
-            for field_name in field_names:
+        if extra_sbr_field:
+            segment_data[field_names[0]] = segment_fields[0]
+            segment_data[field_names[1]] = segment_fields[1]
+            for field_name in field_names[2:]:
                 segment_data[field_name] = None
-                
+
         return segment_data
 
     def _is_final_segment(self, segment_name) -> bool:
