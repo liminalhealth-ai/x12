@@ -772,7 +772,7 @@ class DmgSegment(X12Segment):
     segment_name: X12SegmentName = X12SegmentName.DMG
     date_time_period_format_qualifier: Optional[DateTimePeriodFormatQualifier]
     date_time_period: Optional[Union[str, datetime.date]]
-    gender_code: Optional[GenderCode]
+    gender_code: str
     marital_status_code: Optional[str] = Field(max_length=1)
     race_or_ethnicity: Optional[str]
     citizenship_stats_code: Optional[str] = Field(max_length=2)
@@ -2198,7 +2198,7 @@ class MiaSegment(X12Segment):
     """
 
     segment_name: X12SegmentName = X12SegmentName.MIA
-    covered_days_visit_count: Literal["0"]
+    covered_days_visit_count: str
     pps_operating_outlier_amount: Optional[Decimal]
     lifetime_psychiatric_days_count: Optional[Decimal]
     claim_drg_amount: Optional[Decimal]
