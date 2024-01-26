@@ -1387,7 +1387,7 @@ class Loop2410RefSegment(RefSegment):
     Loop 2400/Claim Service Line Drug Identification Reference Identifier
     """
 
-    reference_identification_qualifier: Literal["XZ"]
+    reference_identification_qualifier: Literal["XZ", "VY"]
 
 
 class Loop2420ANm1Segment(Nm1Segment):
