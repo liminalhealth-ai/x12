@@ -2446,7 +2446,7 @@ class N4Segment(X12Segment):
     """
 
     segment_name: X12SegmentName = X12SegmentName.N4
-    city_name: str = Field(min_length=2, max_length=30)
+    city_name: Optional[str] = Field(min_length=2, max_length=30)
     state_province_code: Optional[str] = Field(max_length=2)
     postal_code: Optional[str] = Field(max_length=15)
     country_code: Optional[str] = Field(max_length=3)
@@ -2580,7 +2580,7 @@ class OiSegment(X12Segment):
     benefits_assignment_certification: Optional[str]
     patient_signature_source_code: Optional[Literal["P"]]
     provider_agreement_code: Optional[str] = Field(max_length=1)
-    release_of_information_code: ReleaseOfInformationCode
+    release_of_information_code: str
 
 
 class PatSegment(X12Segment):

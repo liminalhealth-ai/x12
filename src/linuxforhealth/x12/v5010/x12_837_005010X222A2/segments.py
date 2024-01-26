@@ -590,7 +590,7 @@ class Loop2300PwkSegment(PwkSegment):
         FILE_TRANSFER = "FT"
         BY_FAX = "FX"
 
-    report_type_code: AttachmentReportTypeCode
+    report_type_code: str
     report_transmission_code: AttachmentTransmissionCode
 
 
