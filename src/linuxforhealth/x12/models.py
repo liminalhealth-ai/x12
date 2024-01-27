@@ -133,7 +133,7 @@ class X12Segment(abc.ABC, BaseModel):
         """
         validate_assignment=False
         use_enum_values = True
-        extra = "forbid"
+        extra = "ignore"
 
     def _process_multivalue_field(
         self,
