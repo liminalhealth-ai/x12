@@ -119,7 +119,7 @@ class X12SegmentName(str, Enum):
     TS3 = "TS3"
 
 
-class X12Segment(abc.ABC, BaseModel, validate_assignment=False):
+class X12Segment(abc.ABC, BaseModel):
     """
     X12BaseSegment serves as the abstract base class for all X12 segment models.
     """
@@ -131,7 +131,7 @@ class X12Segment(abc.ABC, BaseModel, validate_assignment=False):
         """
         Default configuration for X12 Models
         """
-
+        validate_assignment=False
         use_enum_values = True
         extra = "forbid"
 
