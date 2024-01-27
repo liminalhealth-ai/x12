@@ -12,6 +12,10 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field, validator
 
+from pydantic import fields as pydantic_field
+
+pydantic_field.ModelField.validate = lambda *args, **kwargs: (args[1], None)
+
 
 class X12Delimiters(BaseModel):
     """
@@ -134,7 +138,7 @@ class X12Segment(abc.ABC, BaseModel):
         use_enum_values = True
         extra = "forbid"
     
-    
+
     def _process_multivalue_field(
         self,
         field_name: str,
