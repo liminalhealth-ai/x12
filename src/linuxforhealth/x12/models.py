@@ -11,21 +11,9 @@ from typing import List, Optional
 from decimal import Decimal
 
 from pydantic import BaseModel, Field, validator
-from pydantic.fields import ModelField
-from typing import Type
 
 
-class OptionalFieldsBaseModel(BaseModel):
-    @classmethod
-    def __init_subclass__(cls, **kwargs):
-        super().__init_subclass__(**kwargs)
-        for field_name, field in cls.__annotations__.items():
-            if isinstance(field, Type) and issubclass(field, BaseModel):
-                # If the field is another Pydantic model, make it optional
-                cls.__annotations__[field_name] = Optional[field]
-
-
-class X12Delimiters(OptionalFieldsBaseModel):
+class X12Delimiters(BaseModel):
     """
     X12Delimiters models the message delimiters used within a X12 transaction.
     """
@@ -131,7 +119,7 @@ class X12SegmentName(str, Enum):
     TS3 = "TS3"
 
 
-class X12Segment(abc.ABC, OptionalFieldsBaseModel):
+class X12Segment(abc.ABC, BaseModel):
     """
     X12BaseSegment serves as the abstract base class for all X12 segment models.
     """
@@ -234,7 +222,7 @@ class X12Segment(abc.ABC, OptionalFieldsBaseModel):
         return x12_str + delimiters.segment_terminator
 
 
-class X12SegmentGroup(abc.ABC, OptionalFieldsBaseModel):
+class X12SegmentGroup(abc.ABC, BaseModel):
     """
     Abstract base class for a container, typically a loop or transaction, which groups x12 segments.
     """
