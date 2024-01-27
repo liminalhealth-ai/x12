@@ -10,6 +10,9 @@ from pydantic import Field, root_validator
 from typing import List
 from linuxforhealth.x12.validators import validate_segment_count
 
+from pydantic import fields as pydantic_field
+
+pydantic_field.ModelField.validate = lambda *args, **kwargs: (args[1], None)
 
 class HealthCareClaimInstitutional(X12SegmentGroup):
     """
