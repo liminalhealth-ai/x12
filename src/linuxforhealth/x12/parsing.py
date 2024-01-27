@@ -293,7 +293,7 @@ class X12Parser(ABC):
         :return: The X12 transactional model.
         """
         if return_raw:
-            return deepcopy(self._context.transaction_data)
+            return self._context.transaction_data
         else:
             return self._transaction_model.unvalidated(**self._context.transaction_data)
 
@@ -345,7 +345,7 @@ class X12Parser(ABC):
         # close transaction set and return the model
         if self._is_final_segment(segment_name):
             self._context.mark_transaction_complete()
-            model: X12SegmentGroup = self.load_model(return_raw=return_raw)
+            model: X12SegmentGroup = deepcopy(self.load_model(return_raw=return_raw))
             self._context.reset_transaction()
             return model
 
