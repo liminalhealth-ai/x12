@@ -138,7 +138,7 @@ class X12ModelReader:
     """
 
     def __init__(self, x12_input: str, output_delimiters: bool = True,
-                 return_raw: bool = True) -> None:
+                 return_raw: bool = False) -> None:
         """
         Initializes the X12ModelReader with a x12_input.
         The x12 input may be a message payload or a path to a x12 file.
