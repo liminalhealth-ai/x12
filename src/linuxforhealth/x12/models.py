@@ -5,6 +5,7 @@ Base models for X12 parsing and validation.
 """
 import abc
 import datetime
+from copy import deepcopy
 from enum import Enum
 from typing import List, Optional
 from decimal import Decimal
@@ -125,8 +126,26 @@ class X12Segment(abc.ABC, BaseModel):
 
     delimiters: Optional[X12Delimiters] = None
     segment_name: X12SegmentName
-    validate_assignment = False
 
+    @classmethod
+    def unvalidated(__pydantic_cls__, **data):
+        for name, field in __pydantic_cls__.__fields__.items():
+            try:
+                data[name]
+            except KeyError:
+                if field.required:
+                    raise TypeError(f"Missing required keyword argument {name!r}")
+                if field.default is None:
+                    # deepcopy is quite slow on None
+                    value = None
+                else:
+                    value = deepcopy(field.default)
+                data[name] = value
+        self = __pydantic_cls__.__new__(__pydantic_cls__)
+        object.__setattr__(self, "__dict__", data)
+        object.__setattr__(self, "__fields_set__", set(data.keys()))
+        return self
+    
     class Config:
         """
         Default configuration for X12 Models
