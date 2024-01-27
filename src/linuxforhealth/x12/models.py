@@ -134,12 +134,6 @@ class X12Segment(abc.ABC, BaseModel):
         use_enum_values = True
         extra = "forbid"
     
-
-    @validator("*", pre=True, always=True)
-    @classmethod
-    def skip_validation(cls, value, field):
-        # Skip validation for all fields
-        return value
     
     def _process_multivalue_field(
         self,

@@ -292,6 +292,7 @@ class X12Parser(ABC):
         :return: The X12 transactional model.
         """
 
+        print(self.self._transaction_model, self._context.transaction_data)
         return self._transaction_model(**self._context.transaction_data)
 
     def parse(
