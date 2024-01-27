@@ -3,6 +3,7 @@ parsing.py
 
 Provides X12 segment parsing support.
 """
+from copy import deepcopy
 import inspect
 import logging
 import re
@@ -292,7 +293,7 @@ class X12Parser(ABC):
         :return: The X12 transactional model.
         """
         if return_raw:
-            return self._context.transaction_data
+            return deepcopy(self._context.transaction_data)
         else:
             return self._transaction_model.unvalidated(**self._context.transaction_data)
 
