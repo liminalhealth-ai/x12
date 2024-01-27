@@ -14,6 +14,13 @@ from pydantic import BaseModel, Field, validator
 from pydantic.fields import ModelField
 
 
+class OptionalModel(BaseModel):
+    class Config:
+        @classmethod
+        def prepare_field(cls, field: ModelField) -> None:
+            field.required = False
+
+
 class X12Delimiters(BaseModel):
     """
     X12Delimiters models the message delimiters used within a X12 transaction.
@@ -125,6 +132,15 @@ class X12Segment(abc.ABC, BaseModel):
     X12BaseSegment serves as the abstract base class for all X12 segment models.
     """
 
+    @classmethod
+    def __pydantic_init_subclass__(cls, **kwargs) -> None:
+        super().__pydantic_init_subclass__(**kwargs)
+
+        for field in cls.model_fields.values():
+            field.default = None
+
+        cls.model_rebuild(force=True)
+
     delimiters: Optional[X12Delimiters] = None
     segment_name: X12SegmentName
     
@@ -154,11 +170,7 @@ class X12Segment(abc.ABC, BaseModel):
         """
         use_enum_values = True
         extra = "forbid"
-        @classmethod
-        def prepare_field(cls, field: ModelField) -> None:
-            field.required = False
-    
-
+        
     def _process_multivalue_field(
         self,
         field_name: str,
