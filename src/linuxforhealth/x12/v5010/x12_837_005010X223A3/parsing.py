@@ -329,6 +329,8 @@ def set_claim_loop(context: X12ParserContext, segment_data: Dict) -> None:
     :param context: The X12Parsing context which contains the current loop and transaction record.
     :param segment_data: The current segment data
     """
+
+    print(context.patient_record, TransactionLoops.CLAIM_INFORMATION)
     if TransactionLoops.CLAIM_INFORMATION not in context.patient_record:
         context.patient_record[TransactionLoops.CLAIM_INFORMATION] = []
 
