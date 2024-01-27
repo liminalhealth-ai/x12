@@ -125,6 +125,7 @@ class X12Segment(abc.ABC, BaseModel):
 
     delimiters: Optional[X12Delimiters] = None
     segment_name: X12SegmentName
+    validate_assignment = False
 
     class Config:
         """
@@ -133,7 +134,6 @@ class X12Segment(abc.ABC, BaseModel):
 
         use_enum_values = True
         extra = "forbid"
-        validation = False
 
     def _process_multivalue_field(
         self,
