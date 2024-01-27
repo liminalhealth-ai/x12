@@ -11,6 +11,7 @@ from typing import List, Optional
 from decimal import Decimal
 
 from pydantic import BaseModel, Field, validator
+from pydantic.fields import ModelField
 
 
 class X12Delimiters(BaseModel):
@@ -126,25 +127,26 @@ class X12Segment(abc.ABC, BaseModel):
 
     delimiters: Optional[X12Delimiters] = None
     segment_name: X12SegmentName
+    
 
-    @classmethod
-    def unvalidated(__pydantic_cls__, **data):
-        for name, field in __pydantic_cls__.__fields__.items():
-            try:
-                data[name]
-            except KeyError:
-                if field.required:
-                    raise TypeError(f"Missing required keyword argument {name!r}")
-                if field.default is None:
-                    # deepcopy is quite slow on None
-                    value = None
-                else:
-                    value = deepcopy(field.default)
-                data[name] = value
-        self = __pydantic_cls__.__new__(__pydantic_cls__)
-        object.__setattr__(self, "__dict__", data)
-        object.__setattr__(self, "__fields_set__", set(data.keys()))
-        return self
+    # @classmethod
+    # def unvalidated(__pydantic_cls__, **data):
+    #     for name, field in __pydantic_cls__.__fields__.items():
+    #         try:
+    #             data[name]
+    #         except KeyError:
+    #             if field.required:
+    #                 raise TypeError(f"Missing required keyword argument {name!r}")
+    #             if field.default is None:
+    #                 # deepcopy is quite slow on None
+    #                 value = None
+    #             else:
+    #                 value = deepcopy(field.default)
+    #             data[name] = value
+    #     self = __pydantic_cls__.__new__(__pydantic_cls__)
+    #     object.__setattr__(self, "__dict__", data)
+    #     object.__setattr__(self, "__fields_set__", set(data.keys()))
+    #     return self
     
     class Config:
         """
@@ -152,6 +154,9 @@ class X12Segment(abc.ABC, BaseModel):
         """
         use_enum_values = True
         extra = "forbid"
+        @classmethod
+        def prepare_field(cls, field: ModelField) -> None:
+            field.required = False
     
 
     def _process_multivalue_field(
@@ -227,24 +232,24 @@ class X12SegmentGroup(abc.ABC, BaseModel):
     Abstract base class for a container, typically a loop or transaction, which groups x12 segments.
     """
 
-    @classmethod
-    def unvalidated(__pydantic_cls__, **data):
-        for name, field in __pydantic_cls__.__fields__.items():
-            try:
-                data[name]
-            except KeyError:
-                if field.required:
-                    raise TypeError(f"Missing required keyword argument {name!r}")
-                if field.default is None:
-                    # deepcopy is quite slow on None
-                    value = None
-                else:
-                    value = deepcopy(field.default)
-                data[name] = value
-        self = __pydantic_cls__.__new__(__pydantic_cls__)
-        object.__setattr__(self, "__dict__", data)
-        object.__setattr__(self, "__fields_set__", set(data.keys()))
-        return self
+    # @classmethod
+    # def unvalidated(__pydantic_cls__, **data):
+    #     for name, field in __pydantic_cls__.__fields__.items():
+    #         try:
+    #             data[name]
+    #         except KeyError:
+    #             if field.required:
+    #                 raise TypeError(f"Missing required keyword argument {name!r}")
+    #             if field.default is None:
+    #                 # deepcopy is quite slow on None
+    #                 value = None
+    #             else:
+    #                 value = deepcopy(field.default)
+    #             data[name] = value
+    #     self = __pydantic_cls__.__new__(__pydantic_cls__)
+    #     object.__setattr__(self, "__dict__", data)
+    #     object.__setattr__(self, "__fields_set__", set(data.keys()))
+    #     return self
 
     def x12(
         self, use_new_lines: bool = True, custom_delimiters: X12Delimiters = None
