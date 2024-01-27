@@ -669,5 +669,7 @@ class Footer(X12SegmentGroup):
     """
     Transaction Footer Information
     """
+    class Config:
+        validation = True
 
     se_segment: SeSegment
