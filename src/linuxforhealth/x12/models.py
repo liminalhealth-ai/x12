@@ -119,15 +119,14 @@ class X12SegmentName(str, Enum):
     TS3 = "TS3"
 
 
-class X12Segment(abc.ABC, BaseModel):
+class X12Segment(abc.ABC, BaseModel, validate_assignment=False):
     """
     X12BaseSegment serves as the abstract base class for all X12 segment models.
     """
 
     delimiters: Optional[X12Delimiters] = None
     segment_name: X12SegmentName
-    validate_assignment = False
-
+    
     class Config:
         """
         Default configuration for X12 Models
@@ -135,7 +134,6 @@ class X12Segment(abc.ABC, BaseModel):
 
         use_enum_values = True
         extra = "forbid"
-        validate_assignment = False
 
     def _process_multivalue_field(
         self,
