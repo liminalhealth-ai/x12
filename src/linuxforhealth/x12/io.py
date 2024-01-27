@@ -137,7 +137,8 @@ class X12ModelReader:
           # do something interesting
     """
 
-    def __init__(self, x12_input: str, output_delimiters: bool = False) -> None:
+    def __init__(self, x12_input: str, output_delimiters: bool = True,
+                 return_raw: bool = True) -> None:
         """
         Initializes the X12ModelReader with a x12_input.
         The x12 input may be a message payload or a path to a x12 file.
@@ -148,6 +149,8 @@ class X12ModelReader:
         """
         self._x12_segment_reader: X12SegmentReader = X12SegmentReader(x12_input)
         self.output_delimiters = output_delimiters
+        self.return_raw = return_raw
+
 
     def __enter__(self) -> "X12ModelReader":
         """
@@ -227,7 +230,8 @@ class X12ModelReader:
                 )
 
             model: X12SegmentGroup = parser.parse(
-                segment_name, segment_fields, self.output_delimiters
+                segment_name, segment_fields, self.output_delimiters,
+                self.return_raw
             )
             if model:
                 yield model

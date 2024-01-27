@@ -285,19 +285,23 @@ class X12Parser(ABC):
 
         return segment_name.lower() == "se"
 
-    def load_model(self) -> X12SegmentGroup:
+    def load_model(self, return_raw=True) -> X12SegmentGroup:
         """
         Loads the instance's data record into a X12 transactional model.
 
         :return: The X12 transactional model.
         """
-        return self._transaction_model.unvalidated(**self._context.transaction_data)
+        if return_raw:
+            return self._context.transaction_data
+        else:
+            return self._transaction_model.unvalidated(**self._context.transaction_data)
 
     def parse(
         self,
         segment_name: str,
         segment_fields: List[str],
         output_delimiters: bool = False,
+        return_raw = True
     ) -> Optional[X12SegmentGroup]:
         """
         Parses an X12 segment into the instance's data record attribute.
@@ -340,7 +344,7 @@ class X12Parser(ABC):
         # close transaction set and return the model
         if self._is_final_segment(segment_name):
             self._context.mark_transaction_complete()
-            model: X12SegmentGroup = self.load_model()
+            model: X12SegmentGroup = self.load_model(return_raw=return_raw)
             self._context.reset_transaction()
             return model
 
