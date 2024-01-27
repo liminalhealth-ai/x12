@@ -26,7 +26,6 @@ class X12Delimiters(BaseModel):
         # the model is immutable and hashable
         allow_mutation = False
         frozen = True
-        validation = False
 
 
 class X12SegmentName(str, Enum):
@@ -134,6 +133,7 @@ class X12Segment(abc.ABC, BaseModel):
 
         use_enum_values = True
         extra = "forbid"
+        validation = False
 
     def _process_multivalue_field(
         self,
