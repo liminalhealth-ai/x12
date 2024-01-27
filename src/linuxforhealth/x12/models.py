@@ -12,11 +12,6 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field, validator
 
-from pydantic import fields as pydantic_field
-
-pydantic_field.ModelField.validate = lambda *args, **kwargs: (args[1], None)
-
-
 class X12Delimiters(BaseModel):
     """
     X12Delimiters models the message delimiters used within a X12 transaction.
