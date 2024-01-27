@@ -10,7 +10,7 @@ from enum import Enum
 from typing import List, Optional
 from decimal import Decimal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 
 class X12Delimiters(BaseModel):
@@ -131,10 +131,16 @@ class X12Segment(abc.ABC, BaseModel):
         """
         Default configuration for X12 Models
         """
-        validate_assignment=False
         use_enum_values = True
-        extra = "ignore"
+        extra = "forbid"
+    
 
+    @validator("*", pre=True, always=True)
+    @classmethod
+    def skip_validation(cls, value, field):
+        # Skip validation for all fields
+        return value
+    
     def _process_multivalue_field(
         self,
         field_name: str,
