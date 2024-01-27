@@ -26,10 +26,6 @@ from typing import Literal, Optional, Dict
 from enum import Enum
 from pydantic import Field, root_validator
 
-from pydantic import fields as pydantic_field
-
-pydantic_field.ModelField.validate = lambda *args, **kwargs: (args[1], None)
-
 
 class HeaderStSegment(StSegment):
     """

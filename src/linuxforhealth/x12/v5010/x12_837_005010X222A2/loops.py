@@ -175,10 +175,6 @@ from linuxforhealth.x12.validators import (
     validate_duplicate_amt_codes,
 )
 
-from pydantic import fields as pydantic_field
-
-pydantic_field.ModelField.validate = lambda *args, **kwargs: (args[1], None)
-
 
 class Loop1000A(X12SegmentGroup):
     """
@@ -669,7 +665,4 @@ class Footer(X12SegmentGroup):
     """
     Transaction Footer Information
     """
-    class Config:
-        validation = True
-
     se_segment: SeSegment

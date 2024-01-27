@@ -21,10 +21,6 @@ from linuxforhealth.x12.support import (
 )
 from linuxforhealth.x12.validators import validate_date_field
 
-from pydantic import fields as pydantic_field
-
-pydantic_field.ModelField.validate = lambda *args, **kwargs: (args[1], None)
-
 
 class AaaSegment(X12Segment):
     """
