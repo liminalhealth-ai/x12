@@ -295,7 +295,7 @@ class X12Parser(ABC):
         if return_raw:
             return self._context.transaction_data
         else:
-            return self._transaction_model.unvalidated(**self._context.transaction_data)
+            return self._transaction_model(**self._context.transaction_data)
 
     def parse(
         self,
