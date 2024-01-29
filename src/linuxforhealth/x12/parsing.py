@@ -251,7 +251,7 @@ class X12Parser(ABC):
         field_names: List = self._get_segment_field_names(segment_name)
         multivalue_fields: Dict = self._get_multivalue_fields(segment_name)
 
-        extra_sbr_field = False
+        extra_field = False
 
         # segment_fields and field_name lengths may not match
         # drive the mapping with segment_fields as it includes all fields within the transactional context
@@ -260,8 +260,8 @@ class X12Parser(ABC):
             try:
                 field_name: str = field_names[index]
             except IndexError as ie:
-                if segment_fields[0] == 'SBR':
-                    extra_sbr_field = True
+                if segment_fields[0] in ['SBR', 'REF']:
+                    extra_field = True
                     break
                 else:
                     msg = f"Error parsing {segment_name} segment field {index}"
@@ -273,7 +273,7 @@ class X12Parser(ABC):
 
             segment_data[field_name] = value if value else None
 
-        if extra_sbr_field:
+        if extra_field:
             segment_data[field_names[0]] = segment_fields[0]
             segment_data[field_names[1]] = segment_fields[1]
             for field_name in field_names[2:]:
