@@ -169,8 +169,8 @@ class X12ModelReader:
         :return: True if the segment is a control segment, otherwise False.
         """
         return segment_name in (
-            # X12SegmentName.ISA,
-            # X12SegmentName.GS,
+            X12SegmentName.ISA,
+            X12SegmentName.GS,
             X12SegmentName.GE,
             X12SegmentName.IEA,
         )
@@ -213,7 +213,6 @@ class X12ModelReader:
                 ]
 
             if self._is_control_segment(segment_name):
-                print(segment_name, segment_fields)
                 continue
 
             if self._is_transaction_header(segment_name):
