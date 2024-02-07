@@ -169,8 +169,8 @@ class X12ModelReader:
         :return: True if the segment is a control segment, otherwise False.
         """
         return segment_name in (
-            X12SegmentName.ISA,
-            X12SegmentName.GS,
+            # X12SegmentName.ISA,
+            # X12SegmentName.GS,
             X12SegmentName.GE,
             X12SegmentName.IEA,
         )
