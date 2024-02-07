@@ -212,8 +212,9 @@ class X12ModelReader:
                     TransactionSetVersionIds.IMPLEMENTATION_VERSION
                 ]
 
-            # if self._is_control_segment(segment_name):
-            #     continue
+            if self._is_control_segment(segment_name):
+                print(segment_name, segment_fields)
+                continue
 
             if self._is_transaction_header(segment_name):
                 transaction_code: str = segment_fields[
