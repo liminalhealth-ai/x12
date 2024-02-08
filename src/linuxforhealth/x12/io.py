@@ -236,7 +236,7 @@ class X12ModelReader:
                 self.return_raw
             )
             if model:
-                yield model, gs_segment
+                yield model, parser._parse_segment(X12SegmentName.GS, gs_segment)
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """
