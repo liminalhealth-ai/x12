@@ -202,6 +202,8 @@ class X12ModelReader:
         """
         version: Optional[str] = None
         transaction_code: Optional[str] = None
+        gs_segment = None
+
 
         for segment_name, segment_fields in self._x12_segment_reader.segments():
 
@@ -211,6 +213,8 @@ class X12ModelReader:
                 ]
 
             if self._is_control_segment(segment_name) or not segment_name.strip():
+                if segment_name == X12SegmentName.GS:
+                    gs_segment = segment_fields
                 continue
 
             if self._is_transaction_header(segment_name):
@@ -232,7 +236,7 @@ class X12ModelReader:
                 self.return_raw
             )
             if model:
-                yield model
+                yield model, gs_segment
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """
