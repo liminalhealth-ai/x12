@@ -26,7 +26,7 @@ from linuxforhealth.x12.v4010.segments import (
 )
 from typing import Literal, Optional, Dict
 from enum import Enum
-from pydantic import Field, root_validator
+from pydantic.v1 import Field, root_validator
 
 
 class HeaderStSegment(StSegment):

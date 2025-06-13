@@ -3,7 +3,7 @@ validators.py
 
 Common/shared validators which may be reused in transaction sets.
 """
-from pydantic import validator
+from pydantic.v1 import validator
 
 
 @validator("hierarchical_parent_id_number", allow_reuse=True)

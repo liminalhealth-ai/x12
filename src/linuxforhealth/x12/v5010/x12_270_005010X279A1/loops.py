@@ -55,7 +55,7 @@ from .segments import (
     Loop2100BPrvSegment,
 )
 from typing import List, Optional
-from pydantic import Field, root_validator
+from pydantic.v1 import Field, root_validator
 from linuxforhealth.x12.validators import validate_duplicate_ref_codes
 
 

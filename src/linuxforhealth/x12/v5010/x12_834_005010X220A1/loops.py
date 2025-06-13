@@ -86,7 +86,7 @@ from .segments import (
     Loop2750DtpSegment,
 )
 from typing import List, Optional
-from pydantic import Field
+from pydantic.v1 import Field
 from linuxforhealth.x12.v5010.segments import BgnSegment
 
 

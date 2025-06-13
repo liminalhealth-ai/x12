@@ -6,7 +6,7 @@ Defines the Professional Claims 837 005010X222A2 transaction set model.
 
 from linuxforhealth.x12.models import X12SegmentGroup
 from .loops import Header, Footer, Loop1000A, Loop1000B, Loop2000A
-from pydantic import Field, root_validator
+from pydantic.v1 import Field, root_validator
 from typing import List
 from linuxforhealth.x12.validators import validate_segment_count
 

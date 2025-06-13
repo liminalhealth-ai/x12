@@ -9,7 +9,7 @@ from typing import List, Dict, Tuple
 from linuxforhealth.x12.models import X12SegmentGroup
 
 from .loops import Footer, Header, Loop2000A
-from pydantic import root_validator
+from pydantic.v1 import root_validator
 from linuxforhealth.x12.validators import validate_segment_count
 
 

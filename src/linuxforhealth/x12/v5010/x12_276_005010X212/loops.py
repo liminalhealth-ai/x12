@@ -49,7 +49,7 @@ from .segments import (
 )
 from linuxforhealth.x12.v5010.segments import SeSegment
 from typing import List, Optional
-from pydantic import Field
+from pydantic.v1 import Field
 
 
 class Header(X12SegmentGroup):

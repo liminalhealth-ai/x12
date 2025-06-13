@@ -10,7 +10,7 @@ from enum import Enum
 from typing import List, Optional
 from decimal import Decimal
 
-from pydantic import BaseModel, Field, validator
+from pydantic.v1 import BaseModel, Field, validator
 
 
 class X12Delimiters(BaseModel):

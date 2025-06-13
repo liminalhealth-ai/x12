@@ -7,7 +7,7 @@ from typing import Dict, Optional, List
 from linuxforhealth.x12.config import get_x12_api_config, X12ApiConfig
 from linuxforhealth.x12.io import X12SegmentReader, X12ModelReader
 from linuxforhealth.x12.parsing import X12ParseException
-from pydantic import ValidationError, BaseModel, Field
+from pydantic.v1 import ValidationError, BaseModel, Field
 
 app = FastAPI()
 

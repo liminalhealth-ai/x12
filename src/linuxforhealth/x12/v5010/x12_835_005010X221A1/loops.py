@@ -46,7 +46,7 @@ from .segments import (
     Loop2110LqSegment,
 )
 from typing import Optional, List
-from pydantic import Field, root_validator
+from pydantic.v1 import Field, root_validator
 from decimal import Decimal
 
 

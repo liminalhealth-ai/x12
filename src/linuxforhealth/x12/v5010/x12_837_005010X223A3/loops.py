@@ -156,7 +156,7 @@ from linuxforhealth.x12.v5010.segments import (
     FrmSegment,
 )
 from typing import List, Optional, Dict
-from pydantic import Field, root_validator
+from pydantic.v1 import Field, root_validator
 from linuxforhealth.x12.validators import (
     validate_duplicate_date_qualifiers,
     validate_duplicate_amt_codes,

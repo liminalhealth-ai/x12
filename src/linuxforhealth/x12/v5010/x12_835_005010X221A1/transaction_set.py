@@ -5,7 +5,7 @@ Defines the Health Care Claims Payment 835 005010X221A1 transaction set model.
 """
 from linuxforhealth.x12.models import X12SegmentGroup
 from .loops import Header, Footer, Loop1000A, Loop1000B, Loop2000
-from pydantic import root_validator
+from pydantic.v1 import root_validator
 from linuxforhealth.x12.validators import validate_segment_count
 from typing import List, Set
 

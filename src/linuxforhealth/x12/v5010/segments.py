@@ -11,7 +11,7 @@ from enum import Enum
 from typing import Dict, List, Literal, Optional, Tuple, Union
 from decimal import Decimal
 
-from pydantic import Field, PositiveInt, condecimal, validator, root_validator, conint
+from pydantic.v1 import Field, PositiveInt, condecimal, validator, root_validator, conint
 
 from linuxforhealth.x12.models import X12Segment, X12SegmentName, X12Delimiters
 from linuxforhealth.x12.support import (

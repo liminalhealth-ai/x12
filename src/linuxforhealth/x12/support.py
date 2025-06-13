@@ -8,7 +8,7 @@ import functools
 import os
 from typing import Union, Dict
 
-from pydantic import validator, BaseModel
+from pydantic.v1 import validator, BaseModel
 
 from .config import IsaDelimiters
 

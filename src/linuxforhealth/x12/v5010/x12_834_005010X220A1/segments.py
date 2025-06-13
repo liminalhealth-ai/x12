@@ -5,7 +5,7 @@ Specialized segment models for the Enrollment 834 005010X220A1 transaction.
 """
 from typing import Literal, Optional
 from enum import Enum
-from pydantic import Field
+from pydantic.v1 import Field
 
 from linuxforhealth.x12.v5010.segments import (
     StSegment,

@@ -24,7 +24,7 @@ from linuxforhealth.x12.v5010.segments import (
 )
 from typing import Literal, Optional, Dict, Union
 from enum import Enum
-from pydantic import Field, root_validator
+from pydantic.v1 import Field, root_validator
 import datetime
 
 
