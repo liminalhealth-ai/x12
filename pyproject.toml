@@ -1,17 +1,59 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ['setuptools>=68', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'linuxforhealth-x12'
+version = '0.5.7'
+description = 'LinuxForHealth x12 streams ASC 5010 X12 health care transactions into Pydantic Models...'
+readme = { file = 'README.md', content-type = 'text/markdown' }
+requires-python = '>=3.8'
+license = { text = 'Apache-2.0' }
+authors = [{ name = 'LinuxForHealth' }]
+classifiers = [
+  'Development Status :: 4 - Beta',
+  'License :: OSI Approved :: Apache Software License',
+  'Operating System :: OS Independent',
+  'Programming Language :: Python :: 3.8',
+  'Programming Language :: Python :: 3.9',
+  'Programming Language :: Python :: 3.10',
+  'Intended Audience :: Healthcare Industry',
+  'Intended Audience :: Developers',
+]
+
+dependencies = [
+  'pydantic>=1.9,<2.0',
+  'python-dotenv>=0.19.0',
+]
+
+[project.optional-dependencies]
+api = [
+  'fastapi>=0.78.0',
+  'uvicorn[standard]>=0.17.0',
+  'requests>=2.27.0',
+]
+dev = [
+  'black>=22.3.0',
+  'pre-commit>=2.14.1',
+  'pytest>=7.1.0',
+  'build',
+  'twine',
+]
+
+[project.scripts]
+lfhx12 = 'linuxforhealth.x12.cli:main'
+lfhx12-api = 'linuxforhealth.x12.api:run_server'
+
+[tool.setuptools]
+package-dir = {'' = 'src'}
+
+[tool.setuptools.packages.find]
+where = ['src']
 
 [tool.black]
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
 line-length = 88
 target-version = ['py38']
-include = '\.pyi?$'
+include = '\\.pyi?$'
 exclude = '''
 (
   /(
