@@ -52,7 +52,7 @@ from .segments import (
 )
 from linuxforhealth.x12.v5010.segments import SeSegment, StcSegment
 from typing import List, Optional
-from pydantic.v1 import Field
+from pydantic import Field
 
 
 class Header(X12SegmentGroup):
@@ -72,7 +72,7 @@ class Loop2220E(X12SegmentGroup):
 
     svc_segment: Loop2220DSvcSegment
     stc_segment: List[StcSegment]
-    ref_segment: Optional[Loop2220DRefSegment]
+    ref_segment: Optional[Loop2220DRefSegment] = None
     dtp_segment: Loop2220DDtpSegment
 
 
@@ -84,9 +84,11 @@ class Loop2200E(X12SegmentGroup):
 
     trn_segment: Loop2200DTrnSegment
     stc_segment: List[StcSegment]
-    ref_segment: Optional[List[Loop2200DRefSegment]] = Field(min_items=0, max_items=7)
-    dtp_segment: Optional[Loop2200DDtpSegment]
-    loop_2220e: Optional[List[Loop2220E]]
+    ref_segment: Optional[List[Loop2200DRefSegment]] = Field(
+        None, min_length=0, max_length=7
+    )
+    dtp_segment: Optional[Loop2200DDtpSegment] = None
+    loop_2220e: Optional[List[Loop2220E]] = None
 
 
 class Loop2100E(X12SegmentGroup):
@@ -104,7 +106,7 @@ class Loop2000E(X12SegmentGroup):
 
     hl_segment: Loop2000EHlSegment
     loop_2100e: Loop2100E
-    loop_2200e: Optional[List[Loop2200E]]
+    loop_2200e: Optional[List[Loop2200E]] = None
 
 
 class Loop2220D(X12SegmentGroup):
@@ -114,7 +116,7 @@ class Loop2220D(X12SegmentGroup):
 
     svc_segment: Loop2220DSvcSegment
     stc_segment: List[StcSegment]
-    ref_segment: Optional[Loop2220DRefSegment]
+    ref_segment: Optional[Loop2220DRefSegment] = None
     dtp_segment: Loop2220DDtpSegment
 
 
@@ -125,9 +127,11 @@ class Loop2200D(X12SegmentGroup):
 
     trn_segment: Loop2200DTrnSegment
     stc_segment: List[StcSegment]
-    ref_segment: Optional[List[Loop2200DRefSegment]] = Field(min_items=0, max_items=7)
-    dtp_segment: Optional[Loop2200DDtpSegment]
-    loop_2220d: Optional[List[Loop2220D]]
+    ref_segment: Optional[List[Loop2200DRefSegment]] = Field(
+        None, min_length=0, max_length=7
+    )
+    dtp_segment: Optional[Loop2200DDtpSegment] = None
+    loop_2220d: Optional[List[Loop2220D]] = None
 
 
 class Loop2100D(X12SegmentGroup):
@@ -145,8 +149,8 @@ class Loop2000D(X12SegmentGroup):
 
     hl_segment: Loop2000DHlSegment
     loop_2100d: Loop2100D
-    loop_2200d: Optional[List[Loop2200D]]
-    loop_2000e: Optional[List[Loop2000E]]
+    loop_2200d: Optional[List[Loop2200D]] = None
+    loop_2000e: Optional[List[Loop2000E]] = None
 
 
 class Loop2200C(X12SegmentGroup):
@@ -156,7 +160,7 @@ class Loop2200C(X12SegmentGroup):
     """
 
     trn_segment: Loop2200CTrnSegment
-    stc_segment: Optional[List[StcSegment]]
+    stc_segment: Optional[List[StcSegment]] = None
 
 
 class Loop2100C(X12SegmentGroup):
@@ -174,8 +178,8 @@ class Loop2000C(X12SegmentGroup):
 
     hl_segment: Loop2000CHlSegment
     loop_2100c: Loop2100C
-    loop_2200c: Optional[Loop2200C]
-    loop_2000d: Optional[List[Loop2000D]] = Field(min_items=1)
+    loop_2200c: Optional[Loop2200C] = None
+    loop_2000d: Optional[List[Loop2000D]] = Field(None, min_length=1)
 
 
 class Loop2200B(X12SegmentGroup):
@@ -184,7 +188,7 @@ class Loop2200B(X12SegmentGroup):
     """
 
     trn_segment: Loop2200BTrnSegment
-    stc_segment: Optional[List[StcSegment]]
+    stc_segment: Optional[List[StcSegment]] = None
 
 
 class Loop2100B(X12SegmentGroup):
@@ -202,8 +206,8 @@ class Loop2000B(X12SegmentGroup):
 
     hl_segment: Loop2000BHlSegment
     loop_2100b: Loop2100B
-    loop_2200b: Optional[Loop2200B]
-    loop_2000c: Optional[List[Loop2000C]] = Field(min_items=1)
+    loop_2200b: Optional[Loop2200B] = None
+    loop_2000c: Optional[List[Loop2000C]] = Field(None, min_length=1)
 
 
 class Loop2100A(X12SegmentGroup):
@@ -212,7 +216,7 @@ class Loop2100A(X12SegmentGroup):
     """
 
     nm1_segment: Loop2100ANm1Segment
-    per_segment: Optional[Loop2100APerSegment]
+    per_segment: Optional[Loop2100APerSegment] = None
 
 
 class Loop2000A(X12SegmentGroup):
@@ -222,7 +226,7 @@ class Loop2000A(X12SegmentGroup):
 
     hl_segment: Loop2000AHlSegment
     loop_2100a: Loop2100A
-    loop_2000b: List[Loop2000B] = Field(min_items=1)
+    loop_2000b: List[Loop2000B] = Field(min_length=1)
 
 
 class Footer(X12SegmentGroup):

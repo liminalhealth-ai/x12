@@ -5,7 +5,8 @@ LinuxForHealth X12 Configuration Settings and specification/format "constants"
 """
 from enum import IntEnum
 from functools import lru_cache
-from pydantic.v1 import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class IsaDelimiters(IntEnum):
@@ -52,11 +53,9 @@ class X12Config(BaseSettings):
     X12 Parsing and Validation Configurations
     """
 
-    x12_character_set: str = Field(regex="^(BASIC|EXTENDED)$", default="BASIC")
+    x12_character_set: str = Field(pattern="^(BASIC|EXTENDED)$", default="BASIC")
     x12_reader_buffer_size: int = 1024000
-
-    class Config:
-        case_sensitive = False
+    model_config = SettingsConfigDict(case_sensitive=False)
 
 
 @lru_cache

@@ -7,7 +7,7 @@ from typing import Dict, Optional, List
 from linuxforhealth.x12.config import get_x12_api_config, X12ApiConfig
 from linuxforhealth.x12.io import X12SegmentReader, X12ModelReader
 from linuxforhealth.x12.parsing import X12ParseException
-from pydantic.v1 import ValidationError, BaseModel, Field
+from pydantic import ConfigDict, ValidationError, BaseModel, Field
 
 app = FastAPI()
 
@@ -28,13 +28,13 @@ class X12Request(BaseModel):
     """
 
     x12: str = Field(description="The X12 payload to process, conveyed as a string")
-
-    class Config:
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "x12": "ISA*03*9876543210*01*9876543210*30*000000005      *30*12345          *131031*1147*^*00501*000000907*1*T*:~GS*HS*000000005*54321*20131031*1147*1*X*005010X279A1~ST*270*1234*005010X279A1~BHT*0022*13*10001234*20060501*1319~HL*1**20*1~NM1*PR*2*ABC COMPANY*****PI*842610001~HL*2*1*21*1~NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~HL*3*2*22*0~TRN*1*93175-012547*9877281234~NM1*IL*1*SMITH*ROBERT****MI*11122333301~DMG*D8*19430519~DTP*291*D8*20060501~EQ*30~SE*13*1234~GE*1*1~IEA*1*000000907~",
             }
         }
+    )
 
 
 @app.post("/x12")
@@ -66,7 +66,7 @@ async def post_x12(
     try:
         if lfh_x12_response.lower() == "models":
             with X12ModelReader(x12_request.x12) as r:
-                api_results = [m.dict() for m in r.models()]
+                api_results = [m.model_dump() for m in r.models()]
         else:
             with X12SegmentReader(x12_request.x12) as r:
                 api_results = []

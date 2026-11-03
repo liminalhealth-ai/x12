@@ -6,7 +6,7 @@ Specialized segment models for the Eligibility 271 005010X279A1 transaction.
 from enum import Enum
 from typing import Literal, Optional, List
 
-from pydantic.v1 import Field
+from pydantic import Field
 from linuxforhealth.x12.v5010.validators import validate_hl_parent_id
 from linuxforhealth.x12.v5010.segments import (
     AaaSegment,
@@ -50,7 +50,7 @@ class HeaderBhtSegment(BhtSegment):
     hierarchical_structure_code: Literal["0022"]
     transaction_set_purpose_code: PurposeCode
     submitter_transactional_identifier: str = Field(min_length=1, max_length=50)
-    transaction_type_code: Optional[Literal["RT"]]
+    transaction_type_code: Optional[Literal["RT"]] = None
 
 
 class Loop2000AHlSegment(HlSegment):
@@ -58,7 +58,7 @@ class Loop2000AHlSegment(HlSegment):
     Loop2000A HL segment adjusted for Information Source usage
     """
 
-    hierarchical_parent_id_number: Optional[str]
+    hierarchical_parent_id_number: Optional[str] = None
     hierarchical_level_code: Literal["20"]
     hierarchical_child_code: Literal["1"]
 
@@ -158,8 +158,8 @@ class Loop2100APerSegment(PerSegment):
         TELEPHONE_EXTENSION = "EX"
 
     communication_number_qualifier_1: CommunicationNumberQualifier1
-    communication_number_qualifier_2: Optional[CommunicationNumberQualifier2]
-    communication_number_qualifier_3: Optional[CommunicationNumberQualifier2]
+    communication_number_qualifier_2: Optional[CommunicationNumberQualifier2] = None
+    communication_number_qualifier_3: Optional[CommunicationNumberQualifier2] = None
 
 
 class Loop2100AAaaSegment(AaaSegment):
@@ -343,7 +343,7 @@ class Loop2100BPrvSegment(PrvSegment):
         SUPERVISING = "SU"
 
     provider_code: ProviderCode
-    reference_identification_qualifier: Optional[Literal["PXC"]]
+    reference_identification_qualifier: Optional[Literal["PXC"]] = None
 
 
 class Loop2000CHlSegment(HlSegment):
@@ -360,7 +360,7 @@ class Loop2100CNm1Segment(Nm1Segment):
     """
 
     entity_identifier_code: Literal["IL"]
-    name_last_or_organization_name: Optional[str]
+    name_last_or_organization_name: Optional[str] = None
 
 
 class Loop2100DNm1Segment(Nm1Segment):
@@ -430,8 +430,8 @@ class Loop2100CInsSegment(InsSegment):
 
     member_indicator: Literal["Y"]
     individual_relationship_code: Literal["18"]
-    maintenance_type_code: Optional[str]
-    benefit_status_code: Optional[str]
+    maintenance_type_code: Optional[str] = None
+    benefit_status_code: Optional[str] = None
 
 
 class Loop2100DInsSegment(InsSegment):
@@ -456,8 +456,8 @@ class Loop2100DInsSegment(InsSegment):
 
     member_indicator: Literal["N"]
     individual_relationship_code: IndividualRelationshipCode
-    maintenance_type_code: Optional[str]
-    benefit_status_code: Optional[str]
+    maintenance_type_code: Optional[str] = None
+    benefit_status_code: Optional[str] = None
 
 
 class Loop2100DtpSegment(DtpSegment):
@@ -918,7 +918,7 @@ class Loop2120Nm1Segment(Nm1Segment):
 
     entity_identifier_code: EntityIdentifierCode
     identification_code_qualifier: IdentificationCodeQualifier
-    entity_relationship_code: Optional[EntityRelationshipCode]
+    entity_relationship_code: Optional[EntityRelationshipCode] = None
 
 
 class Loop2110DtpSegment(DtpSegment):
