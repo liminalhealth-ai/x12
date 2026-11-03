@@ -18,7 +18,7 @@ The `X12_SEM_VER`. This argument should align with the current `linuxforhealth.x
 desired image tag.
 
 ```shell
-docker build --build-arg X12_SEM_VER=0.57.0 -t x12:0.57.0 .
+docker build --build-arg X12_SEM_VER=2.0.0 -t x12:2.0.0 .
 ```
 
 ## Run Container

@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'linuxforhealth-x12'
-version = '1.0.0'
+version = '2.0.0'
 description = 'LinuxForHealth x12 streams ASC 5010 X12 health care transactions into Pydantic Models...'
 readme = { file = 'README.md', content-type = 'text/markdown' }
 requires-python = '>=3.8'
@@ -22,7 +22,8 @@ classifiers = [
 ]
 
 dependencies = [
-  'pydantic>=1.9,<2.0',
+  'pydantic>=2.0,<3',
+  'pydantic-settings>=2.0',
   'python-dotenv>=0.19.0',
 ]
 
