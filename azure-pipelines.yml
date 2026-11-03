@@ -1,0 +1,30 @@
+# linuxforhealth-x12 (fork of LinuxForHealth/x12) CI on Azure DevOps (ClearPath, ADR-0081). Builds
+# the package on pull requests and publishes it to the Azure Artifacts feed cp-python on tags
+# r<version>; nsa-common's data-loading extra pins it. The version is the one in pyproject.toml.
+# How it builds lives in the platform repository's template; this file only says when it runs.
+
+trigger:
+  branches:
+    exclude:
+      - "*"
+  tags:
+    include:
+      - r*
+
+pr:
+  branches:
+    include:
+      - main
+
+resources:
+  repositories:
+    - repository: platform
+      type: github
+      name: liminalhealth-ai/clearpath-azure-architecture
+      endpoint: github.com_liminalhealth-ai
+      ref: refs/heads/master
+
+extends:
+  template: pipelines/templates/python-library.yml@platform
+  parameters:
+    packageName: linuxforhealth_x12
